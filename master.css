@@ -1,0 +1,37 @@
+body {
+}
+
+wrapper {
+  border: 1px solid black;
+
+}
+
+.game {
+  width: 35%;
+  border: 1px solid black;
+
+}
+
+.tic-tac-toe {
+  background-color: black;
+  border: 1px solid black;
+
+}
+
+.row {
+  display: block;
+  margin-top: .2em;
+}
+
+.tic-square {
+  display: inline-block;
+  padding: 2em;
+  background-color: white;
+  color: black;
+
+}
+
+.player-name {
+  width: 100%;
+  text-align: center;
+}
