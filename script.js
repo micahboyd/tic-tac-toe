@@ -52,22 +52,16 @@ var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, dec
 
   for (var i = 0; i < combinations.length; i++) {
 
-    if (combinations[i].join('').replace(/<h2>/g, '')
-        .replace('/', '') === 'XXX') {
+    if (combinations[i].join('') === 'XXX') {
       $('.player-name').text("Player One Wins!");
       playerName = null;
       return 'P1';
     }
 
-    if (combinations[i].join('').replace(/<h2>/g, '')
-      .replace('/', '') === 'OOO') {
+    if (combinations[i].join('') === 'OOO') {
       $('.player-name').text("Player Two Wins!");
       playerName = null;
       return 'P2';
-    }
-
-    if (draw === 9) {
-      return false;
     }
 
   };
@@ -76,18 +70,20 @@ var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, dec
 
 var checkDraw = function(){
 
-  if (checkWinner() === false && draw === 9) {
+  if (checkWinner() != 'P1' && checkWinner() != 'P2'
+      && draw === 9) {
     $('.player-name').text("Draw!");
     playerName = null;
     return true;
   }
-} // // Ends game with Draw
+}; // Ends game with Draw
 
 var playAgain = function(){
    if ( playerName === null) {
-     $('.player-name').text("Play Again?").addClass('play-again');
+     $('.player-name').text("Play again?")
+                      .addClass('play-again');
    }
-} // NEED TO FIX FIRE CONDITION //  // Game ends, ask reset
+};
 
 var reset = function(){
 
@@ -122,13 +118,15 @@ $( ".tic-square" ).on( "click", function() {
   playerNameChange();
   checkWinner();
   checkDraw();
-  setTimeout(playAgain, 3500);
+  setTimeout(playAgain, 3000);
 
 }); // Click tile
 
 $( ".game" ).on( "click", '.play-again', function() {
+
   $('.player-name').removeClass('play-again');
   reset();
+
 });
 
 playerNameChange(); // Ensures it's Player One's turn at the beggining of the game.
