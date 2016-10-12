@@ -1,37 +1,142 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
 body {
+  background-color: black;
 }
 
 wrapper {
-  border: 1px solid black;
+  text-align: center;
+  margin: 0 auto;
+  display: inherit
+}
+
+.title {
+  padding-top: 2em;
+  font-family: 'Amatic SC', cursive;
 
 }
 
 .game {
-  width: 35%;
-  border: 1px solid black;
+  width: 100%;
+  display: inline-block;
 
 }
 
 .tic-tac-toe {
   background-color: black;
-  border: 1px solid black;
-
+  width: 100%
 }
 
 .row {
   display: block;
-  margin-top: .2em;
+  margin; 0 auto;
+  width: 100%;
+
 }
 
 .tic-square {
   display: inline-block;
-  padding: 2em;
+  width: 5em;
+  height: 5em;
+  line-height: 4.5em;
   background-color: white;
   color: black;
+  border: 3px solid black;
+  vertical-align: middle;
+  font-family: 'Indie Flower', cursive;
+  border-radius: .5em;
+
+
 
 }
 
 .player-name {
   width: 100%;
   text-align: center;
+  padding: 5px 0 20px 0;
+  background-color: black;
+  color: white;
+  font-size: 2em;
+  font-family: 'Amatic SC', cursive;
+
+}
+
+h1 {
+  color: white;
+  font-size: 2.5em;
+}
+
+h2 {
+  font-size: 3.5em;
+}
+
+/*#s1 {
+  border-bottom-right-radius: .5em;
+}
+
+#s2 {
+  border-bottom-right-radius: .5em;
+  border-bottom-left-radius: .5em;
+}
+
+#s3 {
+  border-bottom-left-radius: .5em;
+}
+
+#s4 {
+  border-top-right-radius: .5em;
+  border-bottom-right-radius: .5em;
+}
+
+#s5 {
+  border-radius: .5em;
+}*/
+
+
+
+@media (max-width: 20em) {
+
+
+  wrapper {
+    width: 100%;
+  }
+
+  .tic-square {
+    float: left;
+    width: 33.3333vw;
+    height: 33.3333vw;
+    line-height: 33.3333vw;
+    border: 1vw solid black;
+  }
+
+  .player-name {
+    font-size: 15vw;
+    padding-top: 20vw;
+  }
+
+  h1 {
+    font-size: 20vw;
+  }
+
+  h2 {
+    font-size: 25vw;
+  }
+
+  .title {
+    padding-top: 0;
+  }
+
+}
+
+
+
+
+
+
+
 }
