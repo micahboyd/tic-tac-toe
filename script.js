@@ -37,7 +37,7 @@ var playerNameChange = function(){ // Changes player turn
   }
 };
 
-var checkWinner = function(){ // Checks if 'X' or '0' are     placed in 3 a row, declares winner
+var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, declares winner
 
   var combinations = [
     [$('#s1').text(), $('#s2').text(), $('#s3').text()],
@@ -53,21 +53,17 @@ var checkWinner = function(){ // Checks if 'X' or '0' are     placed in 3 a row,
   for (var i = 0; i < combinations.length; i++) {
 
     if (combinations[i].join('').replace(/<h2>/g, '')
-      .replace('/', '') === 'XXX') {
+        .replace('/', '') === 'XXX') {
       $('.player-name').text("Player One Wins!");
       playerName = null;
-      // console.log('Player 1 wins');
-      // scoreP1 += 1
-      return true;
+      return 'P1';
     }
 
     if (combinations[i].join('').replace(/<h2>/g, '')
       .replace('/', '') === 'OOO') {
       $('.player-name').text("Player Two Wins!");
       playerName = null;
-      // console.log('Player 2 wins');
-      // scoreP2 += 1
-      return true;
+      return 'P2';
     }
 
     if (draw === 9) {
@@ -75,7 +71,6 @@ var checkWinner = function(){ // Checks if 'X' or '0' are     placed in 3 a row,
     }
 
   };
-
 
 };
 
@@ -86,16 +81,42 @@ var checkDraw = function(){
     playerName = null;
     return true;
   }
-}
+} // // Ends game with Draw
 
 var playAgain = function(){
-   if ( playerName === null && $('.player-name .play-again') === false ) {
+   if ( playerName === null) {
      $('.player-name').text("Play Again?").addClass('play-again');
    }
-}
+} // NEED TO FIX FIRE CONDITION //  // Game ends, ask reset
+
+var reset = function(){
+
+  if (checkWinner() === 'P1') {
+    scoreP1 += 1;
+    // console.log('P1 = ' + scoreP1);
+  }
+  if (checkWinner() === 'P2') {
+    scoreP2 += 1;
+    // console.log('P2 = ' + scoreP2);
+  }
+
+  $('.tic-square').text('');
+  draw = 0;
+  playerName = 'P1';
+
+  // var playerOneScore = $('<div>').getClass('p1')
+  // .text('Player One' + scoreP1);
+  //
+  // var playerTwoScore$('<div>').getClass('p2')
+  // .text('Player Two' + scoreP2);
 
 
-$( ".tic-square" ).on( "click", function() { // Runs above funtions when clicking a grid box
+  playerNameChange();
+
+
+} // Reset game, update score
+
+$( ".tic-square" ).on( "click", function() {
 
   xo();
   playerNameChange();
@@ -103,12 +124,11 @@ $( ".tic-square" ).on( "click", function() { // Runs above funtions when clickin
   checkDraw();
   setTimeout(playAgain, 3500);
 
-});
+}); // Click tile
 
 $( ".game" ).on( "click", '.play-again', function() {
   $('.player-name').removeClass('play-again');
-  console.log('play again clicked');
+  reset();
 });
-
 
 playerNameChange(); // Ensures it's Player One's turn at the beggining of the game.
