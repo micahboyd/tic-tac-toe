@@ -12,35 +12,38 @@ body {
 wrapper {
   text-align: center;
   margin: 0 auto;
-  display: inherit
+  /*display: inherit*/
+
+  display: block;
 }
 
 .title {
   padding-top: 2em;
   font-family: 'Amatic SC', cursive;
-
 }
 
 .game {
   width: 100%;
-  display: inline-block;
+  /*display: inline-block;*/
 
+  display: block;
 }
 
 .tic-tac-toe {
-  background-color: black;
   width: 100%
+
+  display: block;
 }
 
 .row {
   display: block;
-  margin; 0 auto;
-  width: 100%;
+  margin: 0 auto;
 
+  width: 15em;
 }
 
 .tic-square {
-  display: inline-block;
+  /*display: inline-block;*/
   width: 5em;
   height: 5em;
   line-height: 4.5em;
@@ -52,18 +55,19 @@ wrapper {
   border-radius: .5em;
 
 
-
+  display: block;
+  float: left;
 }
 
 .player-name {
   width: 100%;
   text-align: center;
   padding: 5px 0 20px 0;
-  background-color: black;
   color: white;
   font-size: 2em;
   font-family: 'Amatic SC', cursive;
 
+  display: block;
 }
 
 h1 {
@@ -75,28 +79,12 @@ h2 {
   font-size: 3.5em;
 }
 
-/*#s1 {
-  border-bottom-right-radius: .5em;
+.clearfix {
+  overflow: auto;
 }
 
-#s2 {
-  border-bottom-right-radius: .5em;
-  border-bottom-left-radius: .5em;
-}
 
-#s3 {
-  border-bottom-left-radius: .5em;
-}
-
-#s4 {
-  border-top-right-radius: .5em;
-  border-bottom-right-radius: .5em;
-}
-
-#s5 {
-  border-radius: .5em;
-}*/
-
+/*------------- SCREEN RESIZE -------------*/
 
 
 @media (max-width: 20em) {
@@ -104,6 +92,11 @@ h2 {
 
   wrapper {
     width: 100%;
+  }
+
+  .row {
+    width: 100%;
+    height: 33.3333vw;
   }
 
   .tic-square {
@@ -116,7 +109,7 @@ h2 {
 
   .player-name {
     font-size: 15vw;
-    padding-top: 20vw;
+    padding: 0;
   }
 
   h1 {
@@ -124,7 +117,6 @@ h2 {
   }
 
   h2 {
-    font-size: 25vw;
   }
 
   .title {
