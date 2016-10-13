@@ -1,25 +1,39 @@
 
-var playerName = 'P1'
+var playerName = 'P1';
 var draw = 0;
 
 var scoreP1 = 0;
 var scoreP2 = 0;
 
-var xo = function(){ // Fuction Adds 'X' or 'O' to grid
+var fadeIn = function(){
+
+  $(".tic-square").hide();
+  $("h1").hide().fadeIn('slow', function(){
+    $(".tic-square").fadeIn('slow', function(){
+      $('.player-name').text("Player One's Turn")
+      .hide().fadeIn();
+    });
+  });
+};
+
+var xo = function(){
 
   if ( playerName === 'P1'
-    && $(event.target).text() != 'X'
-    && $(event.target).text() != 'O') {
+    && $(event.target).text() === '') {
 
-    $(event.target).html('<h2>X</h2>');
+    $(event.target).html('<h2>X</h2>').addClass('clicked');
+    $('.player-name').text("Player One's Turn")
+    .hide().fadeIn();
     playerName = 'P2';
     draw += 1;
   }
 
-  else if (playerName === 'P2'
-    && $(event.target).text() != 'X'
-    && $(event.target).text() != 'O') {
-    $(event.target).html('<h2>O</h2>');
+  if (playerName === 'P2'
+    && $(event.target).text() === '') {
+
+    $(event.target).html('<h2>O</h2>').addClass('clicked');
+    $('.player-name').text("Player Two's Turn")
+    .hide().fadeIn();
     playerName = 'P1';
     draw += 1;
 
@@ -27,17 +41,7 @@ var xo = function(){ // Fuction Adds 'X' or 'O' to grid
 
 };
 
-var playerNameChange = function(){ // Changes player turn
-
-  if (playerName === 'P1') {
-    $('.player-name').text("Player One's Turn");
-  }
-  else {
-    $('.player-name').text("Player Two's Turn");
-  }
-};
-
-var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, declares winner
+var checkWinner = function(){
 
   var combinations = [
     [$('#s1').text(), $('#s2').text(), $('#s3').text()],
@@ -54,79 +58,81 @@ var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, dec
 
     if (combinations[i].join('') === 'XXX') {
       $('.player-name').text("Player One Wins!");
+      $('.tic-square').addClass('clicked');
       playerName = null;
       return 'P1';
     }
 
     if (combinations[i].join('') === 'OOO') {
       $('.player-name').text("Player Two Wins!");
+      $('.tic-square').addClass('clicked');
       playerName = null;
       return 'P2';
     }
-
   };
 
 };
 
 var checkDraw = function(){
 
-  if (checkWinner() != 'P1' && checkWinner() != 'P2'
-      && draw === 9) {
-    $('.player-name').text("Draw!");
+  if (checkWinner() != 'P1'
+    && checkWinner() != 'P2'
+    && draw === 9) {
+    $('.player-name').text("Draw!").hide().fadeIn();
     playerName = null;
-    return true;
   }
 }; // Ends game with Draw
 
+var checkEnd = function(){
+
+  if (playerName === null) {
+    setTimeout(playAgain, 2000);
+  }
+};
+
 var playAgain = function(){
-   if ( playerName === null) {
-     $('.player-name').text("Play again?")
-                      .addClass('play-again');
-   }
+
+  $('.player-name').text("Play again?")
+      .addClass('play-again')
+      .hide().fadeIn();
 };
 
 var reset = function(){
 
   if (checkWinner() === 'P1') {
     scoreP1 += 1;
-    // console.log('P1 = ' + scoreP1);
   }
   if (checkWinner() === 'P2') {
     scoreP2 += 1;
-    // console.log('P2 = ' + scoreP2);
   }
 
-  $('.tic-square').text('');
+  $('.p1').text('Player One: ' + scoreP1);
+  $('.p2').text('Player Two: ' + scoreP2);
+
+  $('.tic-square').html('').removeClass('clicked');
+  $('.player-name').removeClass('play-again');
+
   draw = 0;
   playerName = 'P1';
+  $(".tic-square").hide().fadeIn();
 
-  // var playerOneScore = $('<div>').getClass('p1')
-  // .text('Player One' + scoreP1);
-  //
-  // var playerTwoScore$('<div>').getClass('p2')
-  // .text('Player Two' + scoreP2);
-
-
-  playerNameChange();
-
+  changeTurn();
 
 } // Reset game, update score
 
-$( ".tic-square" ).on( "click", function() {
+$( ".tic-square" ).on( "click", function(event) {
 
   xo();
-  playerNameChange();
   checkWinner();
   checkDraw();
-  setTimeout(playAgain, 3000);
+  checkEnd();
 
-}); // Click tile
+});
 
 $( ".game" ).on( "click", '.play-again', function() {
 
-  $('.player-name').removeClass('play-again');
   reset();
 
 });
 
-playerNameChange(); // Ensures it's Player One's turn at the beggining of the game.
+fadeIn();

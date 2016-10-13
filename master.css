@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  border: none;
+  /*border: none;*/
 }
 
 body {
@@ -12,8 +12,11 @@ body {
 wrapper {
   text-align: center;
   margin: 0 auto;
-  /*display: inherit*/
+  display: block;
+}
 
+.game {
+  width: 100%;
   display: block;
 }
 
@@ -22,28 +25,18 @@ wrapper {
   font-family: 'Amatic SC', cursive;
 }
 
-.game {
-  width: 100%;
-  /*display: inline-block;*/
-
-  display: block;
-}
-
 .tic-tac-toe {
   width: 100%
-
   display: block;
 }
 
 .row {
   display: block;
   margin: 0 auto;
-
   width: 15em;
 }
 
 .tic-square {
-  /*display: inline-block;*/
   width: 5em;
   height: 5em;
   line-height: 4.5em;
@@ -53,21 +46,51 @@ wrapper {
   vertical-align: middle;
   font-family: 'Indie Flower', cursive;
   border-radius: .5em;
-
-
   display: block;
   float: left;
+}
+
+.tic-square:hover {
+  box-shadow: inset .1em .1em .1em #000
+}
+
+.clicked:hover {
+  box-shadow: none;
 }
 
 .player-name {
   width: 100%;
   text-align: center;
-  padding: 5px 0 20px 0;
+  padding-top: .1em;
   color: white;
   font-size: 2em;
   font-family: 'Amatic SC', cursive;
-
   display: block;
+}
+
+.score {
+  display: block;
+  width: 15em;
+  margin: 0 auto;
+  padding-top: .1em;
+}
+
+.p1, .p2 {
+  color: white;
+  font-family: 'Amatic SC', cursive;
+  margin: 0 .9em;
+}
+
+.p1 {
+  float: left;
+}
+
+.p2 {
+  float: right;
+}
+
+.clearfix {
+  overflow: auto;
 }
 
 h1 {
@@ -77,10 +100,6 @@ h1 {
 
 h2 {
   font-size: 3.5em;
-}
-
-.clearfix {
-  overflow: auto;
 }
 
 
@@ -94,11 +113,6 @@ h2 {
     width: 100%;
   }
 
-  .tic-tac-toe {
-    /*height: 99.9999vw;*/
-
-  }
-
   .row {
     width: 100%;
     height: 34.5vw;
@@ -110,12 +124,24 @@ h2 {
     height: 33.3333vw;
     line-height: 33.3333vw;
     border: 1vw solid black;
+    border-radius: 3vw;
   }
 
   .player-name {
     font-size: 15vw;
     padding: 0;
   }
+
+  .score {
+    width: 100%;
+  }
+
+  .p1, .p2 {
+    color: white;
+    font-size: 7vw;
+    margin: 0 5vw;
+  }
+
 
   h1 {
     font-size: 20vw;
@@ -127,13 +153,5 @@ h2 {
   .title {
     padding-top: 0;
   }
-
-}
-
-
-
-
-
-
 
 }
