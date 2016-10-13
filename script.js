@@ -1,6 +1,6 @@
 
-var playerName = 'P1';
-var draw = 0;
+var player = 'P1';
+var turn = 0;
 
 var scoreP1 = 0;
 var scoreP2 = 0;
@@ -18,28 +18,29 @@ var fadeIn = function(){
 
     });
   });
+
 };
 
 var xo = function(){
 
-  if ( playerName === 'P1'
+  if ( player === 'P1'
     && $(event.target).text() === '') {
 
     $(event.target).html('<h2>X</h2>').addClass('clicked');
     $('.player-name').text("Player Two's Turn")
     .hide().fadeIn();
-    playerName = 'P2';
-    draw += 1;
+    player = 'P2';
+    turn += 1;
   }
 
-  if (playerName === 'P2'
+  if (player === 'P2'
     && $(event.target).text() === '') {
 
     $(event.target).html('<h2>O</h2>').addClass('clicked');
     $('.player-name').text("Player One's Turn")
     .hide().fadeIn();
-    playerName = 'P1';
-    draw += 1;
+    player = 'P1';
+    turn += 1;
   }
 
 };
@@ -61,14 +62,14 @@ var checkWinner = function(){
     if (combinations[i].join('') === 'XXX') {
       $('.player-name').text("Player One Wins!");
       $('.tic-square').addClass('clicked');
-      playerName = null;
+      player = null;
       return 'P1';
     }
 
     if (combinations[i].join('') === 'OOO') {
       $('.player-name').text("Player Two Wins!");
       $('.tic-square').addClass('clicked');
-      playerName = null;
+      player = null;
       return 'P2';
     }
   };
@@ -78,16 +79,16 @@ var checkDraw = function(){
 
   if (checkWinner() != 'P1'
     && checkWinner() != 'P2'
-    && draw === 9) {
+    && turn === 9) {
 
-    playerName = null;
+    player = null;
     $('.player-name').text("Draw!").hide().fadeIn();
   }
 
 };
 var checkEnd = function(){
 
-  if (playerName === null) {
+  if (player === null) {
     setTimeout(playAgain, 2000);
   }
 };
@@ -113,8 +114,8 @@ var reset = function(){
   $('.tic-square').html('').removeClass('clicked');
   $('.player-name').removeClass('play-again');
 
-  draw = 0;
-  playerName = 'P1';
+  turn = 0;
+  player = 'P1';
   $(".tic-square").hide().fadeIn();
   $('.player-name').text("Player One's Turn")
   .hide().fadeIn();
