@@ -8,10 +8,14 @@ var scoreP2 = 0;
 var fadeIn = function(){
 
   $(".tic-square").hide();
+
   $("h1").hide().fadeIn('slow', function(){
+
     $(".tic-square").fadeIn('slow', function(){
+
       $('.player-name').text("Player One's Turn")
       .hide().fadeIn();
+
     });
   });
 };
@@ -22,7 +26,7 @@ var xo = function(){
     && $(event.target).text() === '') {
 
     $(event.target).html('<h2>X</h2>').addClass('clicked');
-    $('.player-name').text("Player One's Turn")
+    $('.player-name').text("Player Two's Turn")
     .hide().fadeIn();
     playerName = 'P2';
     draw += 1;
@@ -32,15 +36,13 @@ var xo = function(){
     && $(event.target).text() === '') {
 
     $(event.target).html('<h2>O</h2>').addClass('clicked');
-    $('.player-name').text("Player Two's Turn")
+    $('.player-name').text("Player One's Turn")
     .hide().fadeIn();
     playerName = 'P1';
     draw += 1;
-
   }
 
 };
-
 var checkWinner = function(){
 
   var combinations = [
@@ -72,17 +74,17 @@ var checkWinner = function(){
   };
 
 };
-
 var checkDraw = function(){
 
   if (checkWinner() != 'P1'
     && checkWinner() != 'P2'
     && draw === 9) {
-    $('.player-name').text("Draw!").hide().fadeIn();
-    playerName = null;
-  }
-}; // Ends game with Draw
 
+    playerName = null;
+    $('.player-name').text("Draw!").hide().fadeIn();
+  }
+
+};
 var checkEnd = function(){
 
   if (playerName === null) {
@@ -96,7 +98,6 @@ var playAgain = function(){
       .addClass('play-again')
       .hide().fadeIn();
 };
-
 var reset = function(){
 
   if (checkWinner() === 'P1') {
@@ -115,10 +116,10 @@ var reset = function(){
   draw = 0;
   playerName = 'P1';
   $(".tic-square").hide().fadeIn();
+  $('.player-name').text("Player One's Turn")
+  .hide().fadeIn();
 
-  changeTurn();
-
-} // Reset game, update score
+}
 
 $( ".tic-square" ).on( "click", function(event) {
 
@@ -128,7 +129,6 @@ $( ".tic-square" ).on( "click", function(event) {
   checkEnd();
 
 });
-
 $( ".game" ).on( "click", '.play-again', function() {
 
   reset();
