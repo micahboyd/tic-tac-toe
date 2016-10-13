@@ -12,8 +12,6 @@ body {
 wrapper {
   text-align: center;
   margin: 0 auto;
-  /*display: inherit*/
-
   display: block;
 }
 
@@ -24,35 +22,31 @@ wrapper {
 
 .game {
   width: 100%;
-  /*display: inline-block;*/
-
   display: block;
 }
 
 .tic-tac-toe {
   width: 100%
-
   display: block;
 }
 
 .row {
   display: block;
   margin: 0 auto;
-
-  width: 15em;
+  width: 30em;
 }
 
 .tic-square {
   /*display: inline-block;*/
-  width: 5em;
-  height: 5em;
-  line-height: 4.5em;
+  width: 10em;
+  height: 10em;
+  line-height: 9em;
   background-color: white;
   color: black;
-  border: 3px solid black;
+  border: 6px solid black;
   vertical-align: middle;
   font-family: 'Indie Flower', cursive;
-  border-radius: .5em;
+  border-radius: 1em;
 
 
   display: block;
@@ -62,9 +56,9 @@ wrapper {
 .player-name {
   width: 100%;
   text-align: center;
-  padding: 5px 0 20px 0;
+  padding: 10px 0 40px 0;
   color: white;
-  font-size: 2em;
+  font-size: 4em;
   font-family: 'Amatic SC', cursive;
 
   display: block;
@@ -72,11 +66,11 @@ wrapper {
 
 h1 {
   color: white;
-  font-size: 2.5em;
+  font-size: 5em;
 }
 
 h2 {
-  font-size: 3.5em;
+  font-size: 7em;
 }
 
 .clearfix {
@@ -87,7 +81,7 @@ h2 {
 /*------------- SCREEN RESIZE -------------*/
 
 
-@media (max-width: 18em) {
+@media (max-width: 30em) {
 
 
   wrapper {
@@ -113,12 +107,12 @@ h2 {
   }
 
   .player-name {
-    font-size: 15vw;
+    font-size: 12vw;
     padding: 0;
   }
 
   h1 {
-    font-size: 20vw;
+    font-size: 18vw;
   }
 
   h2 {
