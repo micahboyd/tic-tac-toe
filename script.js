@@ -1,43 +1,79 @@
 
-var playerName = 'P1'
-var draw = 0;
+var player = 'P1';
+var turn = 0;
 
 var scoreP1 = 0;
 var scoreP2 = 0;
 
-var xo = function(){ // Fuction Adds 'X' or 'O' to grid
+var nameP1;
+var nameP2;
 
-  if ( playerName === 'P1'
-    && $(event.target).text() != 'X'
-    && $(event.target).text() != 'O') {
+var fadeIn = function(){
 
-    $(event.target).html('<h2>X</h2>');
-    playerName = 'P2';
-    draw += 1;
-  }
+  $(".tic-square").hide().addClass('clicked');
 
-  else if (playerName === 'P2'
-    && $(event.target).text() != 'X'
-    && $(event.target).text() != 'O') {
-    $(event.target).html('<h2>O</h2>');
-    playerName = 'P1';
-    draw += 1;
+  $("h1").hide().fadeIn('slow', function(){
 
-  }
+    $(".tic-square").fadeIn('slow', function(){
+
+      $('.player-name').html('<input class = "input1" placeholder = "Player One Name">')
+      .hide().fadeIn();
+
+      $('.input1').keypress(function(event) {
+        if (event.keyCode === 13) {
+            nameP1 = $('.input1').val();
+
+            $('.player-name').html('<input class = "input2" placeholder = "Player Two Name">')
+            .hide().fadeIn('slow', function(){
+
+              $('.input2').keypress(function(event) {
+                if (event.keyCode === 13) {
+                    nameP2 = $('.input2').val();
+
+                    $('.player-name').html(nameP1 + "'s Turn")
+                    .hide().fadeIn();
+                    $( ".tic-square" ).removeClass('clicked')
+                  }
+              });
+
+            });
+          }
+      });
+
+    });
+
+  });
 
 };
 
-var playerNameChange = function(){ // Changes player turn
+var xo = function(){
 
-  if (playerName === 'P1') {
-    $('.player-name').text("Player One's Turn");
+  if ( player === 'P1'
+    && $(event.target).text() === ''
+    && nameP1 != undefined
+    && nameP2 != undefined) {
+
+    $(event.target).html('<h2>X</h2>').addClass('clicked');
+    $('.player-name').text(nameP2 + "'s Turn").hide().fadeIn();
+
+    player = 'P2';
+    turn += 1;
   }
-  else {
-    $('.player-name').text("Player Two's Turn");
+
+  if (player === 'P2'
+    && $(event.target).text() === ''
+    && nameP1 != undefined
+    && nameP2 != undefined) {
+
+    $(event.target).html('<h2>O</h2>').addClass('clicked');
+    $('.player-name').text(nameP1 + "'s Turn").hide().fadeIn();
+
+    player = 'P1';
+    turn += 1;
   }
+
 };
-
-var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, declares winner
+var checkWinner = function(){
 
   var combinations = [
     [$('#s1').text(), $('#s2').text(), $('#s3').text()],
@@ -53,80 +89,90 @@ var checkWinner = function(){ // Checks if 'X' or '0' are placed in 3 a row, dec
   for (var i = 0; i < combinations.length; i++) {
 
     if (combinations[i].join('') === 'XXX') {
-      $('.player-name').text("Player One Wins!");
-      playerName = null;
+      $('.player-name').text(nameP1 + " Wins!");
+      $('.tic-square').addClass('clicked');
+      player = null;
       return 'P1';
     }
 
     if (combinations[i].join('') === 'OOO') {
-      $('.player-name').text("Player Two Wins!");
-      playerName = null;
+      $('.player-name').text(nameP2 + " Wins!");
+      $('.tic-square').addClass('clicked');
+      player = null;
       return 'P2';
     }
-
   };
 
 };
-
 var checkDraw = function(){
 
-  if (checkWinner() != 'P1' && checkWinner() != 'P2'
-      && draw === 9) {
-    $('.player-name').text("Draw!");
-    playerName = null;
-    return true;
-  }
-}; // Ends game with Draw
+  if (checkWinner() != 'P1'
+    && checkWinner() != 'P2'
+    && turn === 9) {
 
-var playAgain = function(){
-   if ( playerName === null) {
-     $('.player-name').text("Play again?")
-                      .addClass('play-again');
-   }
+    player = null;
+    $('.player-name').text("Draw!").hide().fadeIn();
+  }
+
+};
+var checkEnd = function(){
+
+  if (player === null) {
+    setTimeout(playAgain, 2000);
+  }
 };
 
+var playAgain = function(){
+
+  $('.player-name').text("Play again?")
+      .addClass('play-again')
+      .hide().fadeIn();
+};
 var reset = function(){
 
   if (checkWinner() === 'P1') {
     scoreP1 += 1;
-    // console.log('P1 = ' + scoreP1);
   }
   if (checkWinner() === 'P2') {
     scoreP2 += 1;
-    // console.log('P2 = ' + scoreP2);
   }
 
-  $('.tic-square').text('');
-  draw = 0;
-  playerName = 'P1';
+  if (nameP1.length >= 15){
+    $('.p1').html('<img class="economist" src="keynes.jpg">' + " : " + scoreP1);
+  }
+  else {
+    $('.p1').text(nameP1 + ': ' + scoreP1);
+  }
+  if (nameP2.length >= 15){
+    $('.p2').html('<img class="economist" src="hayek.png">' + " : " + scoreP2);
+  }
+  else {
+    $('.p2').text(nameP2 + ': ' + scoreP2);
+  }
 
-  // var playerOneScore = $('<div>').getClass('p1')
-  // .text('Player One' + scoreP1);
-  //
-  // var playerTwoScore$('<div>').getClass('p2')
-  // .text('Player Two' + scoreP2);
+  $('.tic-square').html('').removeClass('clicked');
+  $('.player-name').removeClass('play-again');
 
+  turn = 0;
+  player = 'P1';
 
-  playerNameChange();
+  $(".tic-square").hide().fadeIn();
+  $('.player-name').text(nameP1 + "'s Turn").hide().fadeIn();
 
+}
 
-} // Reset game, update score
-
-$( ".tic-square" ).on( "click", function() {
+$( ".tic-square" ).on( "click", function(event) {
 
   xo();
-  playerNameChange();
   checkWinner();
   checkDraw();
-  setTimeout(playAgain, 3000);
+  checkEnd();
 
-}); // Click tile
-
+});
 $( ".game" ).on( "click", '.play-again', function() {
 
-  $('.player-name').removeClass('play-again');
   reset();
 
 });
 
-playerNameChange(); // Ensures it's Player One's turn at the beggining of the game.
+fadeIn();
