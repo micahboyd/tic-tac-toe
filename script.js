@@ -5,18 +5,43 @@ var turn = 0;
 var scoreP1 = 0;
 var scoreP2 = 0;
 
+var nameP1;
+var nameP2;
+
 var fadeIn = function(){
 
-  $(".tic-square").hide();
+  $(".tic-square").hide().addClass('clicked');
 
   $("h1").hide().fadeIn('slow', function(){
 
     $(".tic-square").fadeIn('slow', function(){
 
-      $('.player-name').text("Player One's Turn")
+      $('.player-name').html('<input class = "input1" placeholder = "Player One Name">')
       .hide().fadeIn();
 
+      $('.input1').keypress(function(event) {
+        if (event.keyCode === 13) {
+            nameP1 = $('.input1').val();
+
+            $('.player-name').html('<input class = "input2" placeholder = "Player Two Name">')
+            .hide().fadeIn('slow', function(){
+
+              $('.input2').keypress(function(event) {
+                if (event.keyCode === 13) {
+                    nameP2 = $('.input2').val();
+
+                    $('.player-name').html(nameP1 + "'s Turn")
+                    .hide().fadeIn();
+                    $( ".tic-square" ).removeClass('clicked')
+                  }
+              });
+
+            });
+          }
+      });
+
     });
+
   });
 
 };
@@ -24,20 +49,24 @@ var fadeIn = function(){
 var xo = function(){
 
   if ( player === 'P1'
-    && $(event.target).text() === '') {
+    && $(event.target).text() === ''
+    && nameP1 != undefined
+    && nameP2 != undefined) {
 
     $(event.target).html('<h2>X</h2>').addClass('clicked');
-    $('.player-name').text("Player Two's Turn")
+    $('.player-name').text(nameP2 + "'s Turn")
     .hide().fadeIn();
     player = 'P2';
     turn += 1;
   }
 
   if (player === 'P2'
-    && $(event.target).text() === '') {
+    && $(event.target).text() === ''
+    && nameP1 != undefined
+    && nameP2 != undefined) {
 
     $(event.target).html('<h2>O</h2>').addClass('clicked');
-    $('.player-name').text("Player One's Turn")
+    $('.player-name').text(nameP1 + "'s Turn")
     .hide().fadeIn();
     player = 'P1';
     turn += 1;
@@ -60,14 +89,14 @@ var checkWinner = function(){
   for (var i = 0; i < combinations.length; i++) {
 
     if (combinations[i].join('') === 'XXX') {
-      $('.player-name').text("Player One Wins!");
+      $('.player-name').text(nameP1 + " Wins!");
       $('.tic-square').addClass('clicked');
       player = null;
       return 'P1';
     }
 
     if (combinations[i].join('') === 'OOO') {
-      $('.player-name').text("Player Two Wins!");
+      $('.player-name').text(nameP2 + " Wins!");
       $('.tic-square').addClass('clicked');
       player = null;
       return 'P2';
@@ -108,8 +137,8 @@ var reset = function(){
     scoreP2 += 1;
   }
 
-  $('.p1').text('Player One: ' + scoreP1);
-  $('.p2').text('Player Two: ' + scoreP2);
+  $('.p1').text(nameP1 + ': ' + scoreP1);
+  $('.p2').text(nameP2 + ': ' + scoreP2);
 
   $('.tic-square').html('').removeClass('clicked');
   $('.player-name').removeClass('play-again');
@@ -117,7 +146,7 @@ var reset = function(){
   turn = 0;
   player = 'P1';
   $(".tic-square").hide().fadeIn();
-  $('.player-name').text("Player One's Turn")
+  $('.player-name').text(nameP1 + "'s Turn")
   .hide().fadeIn();
 
 }

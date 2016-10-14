@@ -78,6 +78,20 @@ wrapper {
   padding-top: .2em;
 }
 
+.input1, .input2 {
+  font-family: 'Amatic SC', cursive;
+  font-size: 1em;
+  text-align: center;
+  background-color: black;
+  border: 0;
+  color: white;
+  box-shadow: none;
+}
+
+input:focus {
+    outline:none;
+}
+
 .p1, .p2 {
   color: white;
   font-family: 'Amatic SC', cursive;
