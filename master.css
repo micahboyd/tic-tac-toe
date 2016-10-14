@@ -35,6 +35,10 @@ wrapper {
   width: 24em;
 }
 
+.clearfix {
+  overflow: auto;
+}
+
 .tic-square {
   width: 8em;
   height: 8em;
@@ -107,8 +111,9 @@ input:focus {
   float: right;
 }
 
-.clearfix {
-  overflow: auto;
+.economist {
+  width: 1.5em;
+  height: 1.5em;
 }
 
 h1 {
@@ -143,7 +148,7 @@ h2 {
     line-height: 33.3333vw;
     border: 1.5vw solid black;
     border-radius: 3.5vw;
-    font-size: 3.2vw;
+    font-size: 4vw;
     line-height: 30vw;
     margin: 0;
     padding: 0;
@@ -163,6 +168,11 @@ h2 {
     font-size: 7vw;
     margin: 0 5vw;
   }
+  .economist {
+    width: 1.5em;
+    height: 1.5em;
+  }
+
 
 
   h1 {

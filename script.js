@@ -54,8 +54,8 @@ var xo = function(){
     && nameP2 != undefined) {
 
     $(event.target).html('<h2>X</h2>').addClass('clicked');
-    $('.player-name').text(nameP2 + "'s Turn")
-    .hide().fadeIn();
+    $('.player-name').text(nameP2 + "'s Turn").hide().fadeIn();
+
     player = 'P2';
     turn += 1;
   }
@@ -66,8 +66,8 @@ var xo = function(){
     && nameP2 != undefined) {
 
     $(event.target).html('<h2>O</h2>').addClass('clicked');
-    $('.player-name').text(nameP1 + "'s Turn")
-    .hide().fadeIn();
+    $('.player-name').text(nameP1 + "'s Turn").hide().fadeIn();
+
     player = 'P1';
     turn += 1;
   }
@@ -137,17 +137,27 @@ var reset = function(){
     scoreP2 += 1;
   }
 
-  $('.p1').text(nameP1 + ': ' + scoreP1);
-  $('.p2').text(nameP2 + ': ' + scoreP2);
+  if (nameP1.length >= 15){
+    $('.p1').html('<img class="economist" src="keynes.jpg">' + " : " + scoreP1);
+  }
+  else {
+    $('.p1').text(nameP1 + ': ' + scoreP1);
+  }
+  if (nameP2.length >= 15){
+    $('.p2').html('<img class="economist" src="hayek.png">' + " : " + scoreP2);
+  }
+  else {
+    $('.p2').text(nameP2 + ': ' + scoreP2);
+  }
 
   $('.tic-square').html('').removeClass('clicked');
   $('.player-name').removeClass('play-again');
 
   turn = 0;
   player = 'P1';
+
   $(".tic-square").hide().fadeIn();
-  $('.player-name').text(nameP1 + "'s Turn")
-  .hide().fadeIn();
+  $('.player-name').text(nameP1 + "'s Turn").hide().fadeIn();
 
 }
 
