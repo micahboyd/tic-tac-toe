@@ -2,7 +2,7 @@
 ##Tic-tac-toe Project
   14.10.16
 
-  [Game link](https://www.micahhope.github.io/tic-tac-toe "tic-tac-toe")
+  [Game link](https://micahhope.github.io/tic-tac-toe "tic-tac-toe")
 
 ###Intro
 
